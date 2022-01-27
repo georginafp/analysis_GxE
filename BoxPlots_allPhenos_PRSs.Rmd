@@ -1,0 +1,116 @@
+---
+title: "Boxplot_allpheno"
+author: "Georgina Fuentes"
+date: "10/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+# Establishing the working directory 
+setwd("D:/Georgina/Documents/Creating_M1")
+
+# Listing all the elements present in the directory 
+fold <- as.factor(list.files())
+
+# Only the folders from the 10 phenotypes are going to be processed
+t <- length(fold) - 10 
+
+# Save its length in a new  variable 
+n <- length(fold)-t
+
+# Create an empty list 
+datalist = list()
+
+# For each elements in the directory, enter to each folder and establish it as the working directory 
+for (i in 1:n){
+  setwd(paste0("D:/Georgina/Documents/Creating_M1", "/", fold[[i]]))  									                  
+  fileNames1 <- list.files(pattern = ".summary")	 		        	# List files with extension = .summary					
+  library(data.table)  
+  dat <- fread(fileNames1)                                      # Read the files 
+  
+  fileNames2 <- list.files(pattern = "scaled_PRSvalues.txt")    # List files with extension = . scaled_PRSvalues.txt
+  dat1 <- fread(fileNames2)                                     # Read the files 
+  
+  threshold <- dat$Threshold		                                # Save the threshold in a new variable 								                          
+  threshold <- paste0("Pt_", threshold)	                        # Paste the preffix Pt_ used in the files 
+  
+  library(dplyr)    
+  dat2 <- dat1 %>%                                              # select only values from the best threshold (according to what PRSice has generated )
+    select(c(FID, IID, threshold))
+  
+  datalist[[i]] <- dat2                                         # Save each element in a list (the empty one created above)
+  
+}
+
+big_data = do.call(cbind, datalist)                             # join all the elements from the list together 
+colnames(big_data)[1] <- "F_ID"                                 # change the first levels so that one can keep them and delete the others 
+colnames(big_data)[2] <- "I_ID"
+
+rm_col <- c("FID", "IID")
+
+big_data2 <- big_data[, !(colnames(big_data) %in% rm_col), drop = FALSE]
+which_yes <- which(big_data2 == "TRUE")                         # save the index of the columns that are ids                    
+
+big_data3 <- big_data[, which_yes, with = FALSE]                # keep only columns that are not in the index list containing columns of IDS 
+
+# Relabel the columns 
+names(big_data3) <- c("FID", "IID", "BW", "GA", "BMI", "SBP", "DBP", "FEV", 
+                      "HGT", "FVC", "FM", "WC")
+
+# Remove the IDS col
+dat_boxplot <- big_data3[,-1]
+dat_boxplot <- dat_boxplot[,-1]
+
+# plot
+boxplot(dat_boxplot)
+
+
+
+## ggplot 
+
+library(data.table)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(viridis)
+library(tibble)
+
+
+DF <- rownames_to_column(dat_boxplot, var = "threshold")
+columns <- names(DF[,2:ncol(DF)])
+
+DF <- DF %>% pivot_longer(cols = all_of(columns), names_to = "Threshold", 
+                          values_to = "Value")
+
+
+DF %>%														
+			  ggplot( aes(x=Threshold, y=Value, fill=Threshold)) +									# boxplot using ggplot tools (PDF extension)
+			  geom_boxplot() +
+			  scale_fill_viridis(discrete = TRUE, alpha=0.9) +
+			  geom_jitter(color="black", size=0.4, alpha=0.5) +
+			 #theme_ipsum() +
+			  theme(
+			    legend.position="right",
+			    plot.title = element_text(size=11), 
+			    legend.background = element_rect(fill = "white"),
+          legend.key = element_rect(fill = "white", color = NA),
+			  ) +
+        scale_fill_discrete(name = "Thresholds (Pt)", 
+                            labels = c("0.01", "0.05", "0.05", "1", "0.01", 
+                    "0.01", "0.001", "0.001", "0.05", "0.001")) + 
+			  ggtitle("Best threshold PRS scaled values from the interaction phenotypes") +
+			  xlab("Phenotypes") + 
+        ylab("PRS values")
+			
+			ggsave("ggplot_all_pheno_boxplot.pdf")	
+			ggsave("ggplot_all_pheno_boxplot.png")
+
+			
+
+```
+
