@@ -406,3 +406,6 @@ summary(d3$PRSbmi, useNa="ifany")#no missings
 summary(d3$PRSfm, useNa="ifany")#no missings
 summary(d3$PRSwc, useNa="ifany")#no missings
 
+
+
+save.image("Descriptives.R")
