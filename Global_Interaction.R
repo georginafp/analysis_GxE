@@ -3,7 +3,7 @@
 ##...........................................................
 
 
-load("RegressionModels.R)
+load("RegressionModels.RData)
 source("StatisticalAnalysis_RegressionModels.R")
 
 
