@@ -1,4 +1,4 @@
-# Computational approach to study the combined effect of maternal tobacco smoking and polygenic risk scores on birth weight and body mass index in childhood 
+# Study of the combined effect of maternal tobacco smoking and polygenic risk scores on birth weight and body mass index in childhood 
 
 The next repository contains the commands to calculate polygenic risk scores, an estimate of an individual’s genetic liability to a trait or disease, calculated according to their genotype profile and relevant genome-wide association study (GWAS) data), enabling person’s individual risk of developing a particular disease. 
 Hence, PRSs for 4 common traits in the Human Early Life Exposome *(HELIX)* project are included in the analyses. The *HELIX* project contains data from 1.304 children aged between six and eleven years old, coming from six on-going European cohorts. Once the PRS were calculated, one tested the effect modification of each PRS on the association between maternal smoking during pregnancy and each common trait to define: (1) how maternal smoking during pregnancy modifies the mentioned phenotypes, and (2) its combined effect. 
