@@ -408,4 +408,4 @@ summary(d3$PRSwc, useNa="ifany")#no missings
 
 
 
-save.image("Descriptives.R")
+save.image("Descriptives.RData")
