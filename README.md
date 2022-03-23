@@ -5,19 +5,23 @@ Hence, PRSs for 4 common traits in the Human Early Life Exposome *(HELIX)* proje
 
 ## Preamble
 
-*1.* A file whose contains the commands needed for preparing the base data is included
+*1.* A file whose contains the commands needed for preparing the base data is included.
 
 *2.* A script is uploaded for preparing the phenotypic data in three main groups of traits. 
 
-*3.* A file including the code for computing the polygenic risk scores *with* validation arguments and with the base data in chromosome:position (chr:pos) nomenclature
+*3.* Files including the code for computing the polygenic risk scores in all the traits one tested for the presented study. 
 
-*4.* Script containing the code for computing the polygenic risk scores *without* validation arguments and with the base data in rs (SNP name) nomenclature
+*4.* Script containing the code for a descriptive analysis.
 
-*5.* A file that summarises results and creates matrices is incorporated as well. 
+*5.* Codes to represent scaled boxplots for all the phenotypes tested. 
+
+*6.* A file that summarises results and creates matrices is incorporated as well. 
 
 *8.* The script for the statistical analyses (linear regresion models) is also included. 
 
-*9.* Finally, the code to perform the interaction plots are enclosed as well. 
+*9.* The code to perform the interaction plots are enclosed as well. 
+
+*10.* A file that includes the script to test for global interaction. 
 
 
 
