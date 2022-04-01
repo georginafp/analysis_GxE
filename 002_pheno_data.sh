@@ -1,6 +1,6 @@
-########################################################################
-#### Aging, reproductive, metabolic, respiratory_allergy phenotypes ####
-########################################################################
+#####################################################
+#### Preparing pheno data for BW, BMI, FM and WC ####
+#####################################################
 
 
 # In R: 
@@ -100,103 +100,4 @@ other <- fread("georgina_prs.csv")
 ###### FILTERING THE DATA FOR ONLY EUROPEAN ANCESTRY 
 europeans <- which(m$FINAL_ancestry == "EUR")
 only_eur <- m[europeans, ]
-write_tsv(only_eur, "pheno_data_eur.tsv")
-
-
-
-
-
-
-
-###################################
-#### protein relate phenotypes ####
-###################################
-
-
-# Call the needed libraries
-library(minfi)
-library(readr)
-library(dplyr)
-
-# Load the proteome object which is an ExpressionSet containing proteome data from HELIX 
-load("proteome_subcohort_v5.Rdata")
-
-# Get the expression raw data from proteome
-# See that individuals are in columns while proteins in row
-dd<-exprs(proteome_subcohort)
-
-# Need the transposed matrix to have individuals in rows and proteins in columns 
-dd1 <- data.frame(t(dd))
-colnames(db1)[which(names(db1) == "V1")] <- "LabID"
-
-# Write a tab separated file from the previous object so that one can merge it with metadata from HELIX
-write.table(dd1, "db_proteins.txt", row.names=TRUE, col.names=TRUE, quote=F)
-
-# Now, one can proceed with the commands from above
-
-
-
-
-
-
-#################################
-#### neurological phenotypes ####
-#################################
-
-
-# READING CONNER'S DATABASE
-library(haven)
-dat_con <- read_dta("Helix all Conners_2017_06_15_v2r.dta")
-
-# READING RAVEN'S DATABASE
-dat_rav <- read_dta("neurov6.dta")
-
-# READING CBCL'S DATABASE
-dat_cbcl <- read_dta("CBCL_directas_2017_06_15v4r.dta")
-
-# Only dat_con and dat_cbcl contain HELIX ID, so merge them together by the mentioned ID
-m=merge(dat_con, dat_rav,by="hs_idnum_helix", all.x=T)
-
-
-# Change the label of the already created object (m) so that a merge between this and the RAVEN'S database can be done: 
-colnames(m)[which(names(m) == "hs_idnum.x")] <- "hs_idnum"
-
-
-# Merge both by id number
-m1=merge(m, dat_rav, by="hs_idnum", all.x=T)
-
-
-# The HELIX ID is a combination of the cohort + the id number, so one is creating a new variable (hs_idnum_helix) joining both cohort and id number: 
-dat_rav$hs_idnum_helix<- paste(dat_rav$hs_cohort, dat_rav$hs_idnum)
-
-
-# Remove the space between them: 
-dat_rav$hs_idnum_helix <- gsub('\\s+', '', dat_rav$hs_idnum_helix)
-
-
-# Merge the RAVEN'S database with the already created CONNER'S + CBCL'S database by the HELIX ID (created above in RAVEN'S)
-m1=merge(m,dat_rav,by="hs_idnum_helix", all.x=T)
-
-
-# Remove duplicates 
-m1 = m1[!duplicated(m1$hs_idnum_helix),]
-
-
-# Load the metadata/codebook from Helix final GWAS:
-setwd("/home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/")
-dat <- read.table("HELIX_GWAS_FINAL_ALLmeta_upd_codebook.csv", sep=";", header=TRUE, dec=",")
-
-
-# Merge it with the already created object containing all the database for neuro traits, but first, change the label of the HelixID column in the neuro database object for HelixID which is the one that appears in the metadata object:
-colnames(m1)[which(names(m1) == "hs_idnum_helix")] <- "HelixID"
-
-
-# Proceed with the merging: 
-m2=merge(dat,m1,by="HelixID", all.x=T)
-dim(m2) # 1303 x 166 --> no duplicates
-
-
-###### FILTERING THE DATA FOR ONLY EUROPEAN ANCESTRY 
-europeans <- which(m2$FINAL_ancestry == "EUR")
-only_eur <- m2[europeans, ]
 write_tsv(only_eur, "pheno_data_eur.tsv")
