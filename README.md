@@ -8,7 +8,7 @@ The repository contains the commands to study the combined effect of maternal to
 
 *2.* Script to prepare phenotypic data in three main groups of traits.
 
-*3-6* Files to compute the PRS for BW and BMI related traits and testing their associations with the phenotypic traits using PRSice v2.
+*3-6.* Files to compute the PRS for BW and BMI related traits and testing their associations with the phenotypic traits using PRSice v2.
 
 *7.* Code for a descriptive analysis.
 
