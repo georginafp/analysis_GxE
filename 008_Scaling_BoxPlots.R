@@ -34,8 +34,8 @@ for (i in 1:n){
 		fold1 <- gsub("[^a-zA-Z]", "", fold)				# Keep only the letters from the folders
 		fold1 <- fold1[1:n]						# Remove the README file present in the directory
 		
-		if (length(list.files(path=paste0(getwd(), 
-						  "/", fold1[[i]], "_EUR"), 
+		if (length(list.files(path=paste0(getwd(), "/", fold1[[i]], 
+						  "_EUR"), 
 				      all.files=TRUE, 
 				      pattern="^[^\\.]|\\.[^\\.]")) > 0){   	# Keep only those directories where files exists (are not empty) 
 			
