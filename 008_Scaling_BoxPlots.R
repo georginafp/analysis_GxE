@@ -36,7 +36,8 @@ for (i in 1:n){
 		
 		if (length(list.files(path=paste0(getwd(), 
 						  "/", fold1[[i]], "_EUR"), 
-				      all.files=TRUE, pattern="^[^\\.]|\\.[^\\.]")) > 0){   # Keep only those directories where files exists (are not empty) 
+				      all.files=TRUE, 
+				      pattern="^[^\\.]|\\.[^\\.]")) > 0){   	# Keep only those directories where files exists (are not empty) 
 			
 			setwd(paste0(getwd(), "/", fold1[[i]], "_EUR"))  	# Assign the new working directory for the trait_EUR folder
 			
@@ -50,15 +51,16 @@ for (i in 1:n){
     			ids <- dat[,1:2]					# save the ids in a new variable called 'ids'
     			escalats1 <- cbind(ids, escalats)			# Adding the ids another time		
 			names(escalats1) <- names(dat)
-    			write.table(escalats1, "scaled_PRSvalues.txt", row.names=F, quote=F)	# Write a file with the scaled values 
+    			write.table(escalats1, "scaled_PRSvalues.txt", 
+				    row.names=F, quote=F)			# Write a file with the scaled values 
 		
-			data <- escalats							# Copy scaled data to a new auxiliar variable
+			data <- escalats					# Copy scaled data to a new auxiliar variable
 	
-			DF <- rownames_to_column(data, var = "threshold")			# The next three lines of code are: 	
-			columns <- names(DF[,2:ncol(DF)])					# Reshaping the data so that the column names 	
+			DF <- rownames_to_column(data, var = "threshold")	# The next three lines of code are: 	
+			columns <- names(DF[,2:ncol(DF)])			# Reshaping the data so that the column names 	
 			DF <- DF %>% pivot_longer(cols = all_of(columns), 
 						  names_to = "Threshold", 
-						  values_to = "Value")				# become one column and the values are in one column.	
+						  values_to = "Value")		# become one column and the values are in one column.	
 
 
 			pdf("simple_boxplot.pdf")
@@ -75,7 +77,8 @@ for (i in 1:n){
 ##############
 
 			DF %>%														
-			  ggplot( aes(x=Threshold, y=Value, fill=Threshold)) +		# boxplot using ggplot tools (PDF extension)
+			  ggplot( aes(x=Threshold, y=Value, 
+				      fill=Threshold)) +			# boxplot using ggplot tools (PDF extension)
 			  geom_boxplot() +
 			  scale_fill_viridis(discrete = TRUE, alpha=0.9) +
 			  geom_jitter(color="black", size=0.4, alpha=0.5) +
@@ -87,14 +90,15 @@ for (i in 1:n){
 			  ggtitle("Boxplot of the PRS scaled values") +
 			  xlab("Thresholds")
 			
-			ggsave("ggplot_boxplot.pdf")					# save it in the current directory (each folder) 
+			ggsave("ggplot_boxplot.pdf")				# save it in the current directory (each folder) 
 
 
 
 
 
 			DF %>%														
-			  ggplot( aes(x=Threshold, y=Value, fill=Threshold)) +		# boxplot using ggplot tools (PNG extension)
+			  ggplot( aes(x=Threshold, y=Value, 
+				      fill=Threshold)) +			# boxplot using ggplot tools (PNG extension)
 			  geom_boxplot() +
 			  scale_fill_viridis(discrete = TRUE, alpha=0.9) +
 			  geom_jitter(color="black", size=0.4, alpha=0.5) +
@@ -106,7 +110,7 @@ for (i in 1:n){
 			  ggtitle("Boxplot of the PRS scaled values") +
 			  xlab("Thresholds")
 
-			ggsave("ggplot_boxplot.png")					# save it in the current directory (each folder) 
+			ggsave("ggplot_boxplot.png")				# save it in the current directory (each folder) 
 
 				
 		}
