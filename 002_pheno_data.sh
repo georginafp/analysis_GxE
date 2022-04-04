@@ -15,7 +15,7 @@ head(dat)
 # Assigning the working directory, the one that contains the block of traits of HELIX
 setwd("/home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/db_pheno/repr/")
 
-# Read and save the pheno information from reproductive block (for instance)
+# Read and save the pheno information from reproductive block and metabolic-related
 db <- read.table("db_egg.csv", sep=",", header=TRUE, dec=",")
 head(db)
 
@@ -41,9 +41,9 @@ dim(m) # 1304
 
 
 
-# For calculating the reproductive PRS and TL, one needs: 
+# For calculating the reproductive and metabolic-related traits (MR), one needs: 
 
-	# (1) BW and TL in terms of a z-score (*BW Z-score = [BW value – BW mean]/standard deviation) 
+	# (1) BW and MR in terms of a z-score (*BW Z-score = [BW value – BW mean]/standard deviation) 
 		
 	# MEAN 
 	mean_bw <- mean(m$e3_bw, na.rm=TRUE)
@@ -94,7 +94,7 @@ setwd("/home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/db_pheno/")
 other <- fread("georgina_prs.csv")
 
 # Repeat procedure of merging by HelixID 
-....
+.... ## from line 24 to 97
 
 
 ###### FILTERING THE DATA FOR ONLY EUROPEAN ANCESTRY 
