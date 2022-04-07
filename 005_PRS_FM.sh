@@ -24,3 +24,4 @@ Rscript /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/scripts/Tem
 --perm 10000 \
 --all-score \
 --out /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/results/041_FM/FM_EUR/HELIX_FM
+
