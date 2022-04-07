@@ -1,3 +1,4 @@
+
 Rscript /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/scripts/Templates_PRSice_v2.0/PRSice.R --dir . \
 --prsice /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/scripts/Templates_PRSice_v2.0/PRSice_linux \
 --base /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/base_data/028_BMI/base_data.txt \
@@ -23,3 +24,4 @@ Rscript /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/scripts/Tem
 --perm 10000 \
 --all-score \
 --out /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/results/028_BMI/BMI_EUR/HELIX_zBMI
+
