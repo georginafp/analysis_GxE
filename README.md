@@ -8,12 +8,12 @@ The repository contains the commands to study the combined effect of maternal to
 
 *2.* Code to prepare phenotypic data to estimate PRS.
 
-*3-6.* Codes to compute the PRS for BW, BMI, waist circumference (WC), fat mass (FM), and to test their associations with the phenotypic traits using PRSice v2.
+*3-7.* Codes to compute the PRS for BW, BMI, waist circumference (WC), fat mass (FM), and to test their associations with the phenotypic traits using PRSice v2.
 
-*7.* Code to scale PRS and create boxplots boxplots.
+*8.* Code to scale PRS and create boxplots boxplots.
 
-*8.* Code to create the database of the study (smoking + PRS + traits + covariates), create PRS tertiles, and make  descriptive analysis.
+*9.* Code to create the database of the study (smoking + PRS + traits + covariates), create PRS tertiles, and make  descriptive analysis.
 
-*9.* Code to estimate the correlation among PRS and phenotypic traits, and their plot.
+*10.* Code to estimate the correlation among PRS and phenotypic traits, and their plot.
 
-*10.* Code for the association analyses (linear regression models adjusted for covariates with and without interaction terms).
+*11.* Code for the association analyses (linear regression models adjusted for covariates with and without interaction terms).
