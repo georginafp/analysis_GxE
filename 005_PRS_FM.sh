@@ -1,3 +1,4 @@
+
 Rscript /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/scripts/Templates_PRSice_v2.0/PRSice.R --dir . \
 --prsice /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/scripts/Templates_PRSice_v2.0/PRSice_linux \
 --base /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/base_data/041_FM/base_data.txt \
@@ -23,23 +24,3 @@ Rscript /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/scripts/Tem
 --perm 10000 \
 --all-score \
 --out /home/isglobal.lan/gfuentes/data/WS_HELIX/HELIX_preproc/pgrs/results/041_FM/FM_EUR/HELIX_FM
-
-
-## NOTES: 
-# if there are spaces after " \ "next command will not be recogized
-# --fastscore T \  : true if you want to get different thresholds
-# --all-score : to get PRS for each of the thesholds indicated
-# --out : indicate name of the output files
-# by default: makes average, if --score sum indicated, sum of effect sizes
-# We have to specify the names of the variables in the GWAS reference as:
-    # --snp SNP \
-    # --chr CHR \
-    # --bp BP \
-    # --A1 A1 \ #effect allele
-    # --A2 A2 \ #non effect allele
-    # --stat OR \
-    # --pvalue P
-
-# A temporal folder that PRSice needs to run is automatically and by default created
-# Therefore, one can remove them by the following line of command
-rm -r lib
